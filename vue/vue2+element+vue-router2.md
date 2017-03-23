@@ -53,37 +53,39 @@ npm install style-loader -S
 
 ### 6在webpack.config中配置匹配字体的loader
 
-       module: {
-           rules: [{
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {}
-                    // other vue-loader options go here
-                }
-            }, {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            }, {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            }, {
-                test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-                loader: 'file-loader'
-            }, {
-                test: /\.(png|jpg|gif|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]?[hash]'
-                }
-            }]
-    },
+```javascript
+   module: {
+       rules: [{
+            test: /\.vue$/,
+            loader: 'vue-loader',
+            options: {
+                loaders: {}
+                // other vue-loader options go here
+            }
+        }, {
+            test: /\.js$/,
+            loader: 'babel-loader',
+            exclude: /node_modules/
+        }, {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
+        }, {
+            test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+            loader: 'file-loader'
+        }, {
+            test: /\.(png|jpg|gif|svg)$/,
+            loader: 'file-loader',
+            options: {
+                name: '[name].[ext]?[hash]'
+            }
+        }]
+},
+```
 ### 和elementui的整合完成
 
 使用elemntUI
 
-```
+```javascript
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 
@@ -102,7 +104,7 @@ Vue.use(ElementUI);
 
   ### 使用vue-router
 
-  ```
+  ```javascript
   import VueRouter from 'vue-router';
   Vue.use(VueRouter);
   //经过测试这里不能写成require（./router）的形式，只能这么写才能生效，暂时不知道为啥
@@ -115,7 +117,7 @@ Vue.use(ElementUI);
 
   ### router.js中配置如下
 
-  ```
+  ```javascript
   //这个路由表是从app.vue开始算起的，如果加载后的vue文件包含子路由，都需要配置在children中
   export default {
   	routes: [{
@@ -153,7 +155,7 @@ Vue.use(ElementUI);
 
   例如
 
-  ```
+  ```vue
   leftNav: resolve => require(['./views/left-nav.vue'], resolve),
   对应页面中的
   <router-view name="leftNav"></router-view>
@@ -161,7 +163,7 @@ Vue.use(ElementUI);
 
   其中：
 
-  ```
+  ```javascript
    resolve => require(['./views/left-nav.vue'], resolve),
   ```
 
@@ -169,7 +171,7 @@ Vue.use(ElementUI);
 
   简单的理解为就是类似
 
-  ```
+  ```javascript
   function(resolve){
   	return require(['./views/left-nav.vue'], resolve);
   }
@@ -179,7 +181,7 @@ Vue.use(ElementUI);
 
   ### app.vue如下
 
-  ```
+  ```vue
   <template>
   	<div id="app">
   		{{welcome}}
@@ -208,7 +210,7 @@ Vue.use(ElementUI);
 
   ### index.vue如下
 
-  ```
+  ```vue
   <template>
   	<div>
   		<span>{{msg}}</span>
